@@ -65,7 +65,10 @@ You can use the following code to run inference with the model. The model is sav
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
-model_name = './model'
+torch.backends.cuda.enable_mem_efficient_sdp(False)
+torch.backends.cuda.enable_flash_sdp(False)
+
+model_name = 'moxin-org/moxin-7b'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
         model_name,
