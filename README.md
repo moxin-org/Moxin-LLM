@@ -1,6 +1,6 @@
-<h1 align="center"> Moxin 7B </h1>
+<h1 align="center"> Moxin LLM</h1>
 
-<p align="center"> <a href="https://github.com/moxin-org/Moxin-LLM/blob/main/report/Moxin_7B.pdf">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-7b">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-chat-7b">Chat Model</a>  </p>
+<p align="center"> <a href="https://github.com/moxin-org/Moxin-LLM/blob/main/report/Moxin_7B.pdf">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-llm-7b">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-chat-7b">Chat Model</a>  </p>
 
 
 ## Introduction
@@ -14,7 +14,7 @@ We follow MOF to release the datasets during training, the training scripts, and
 
 
 ## Model
-You can download our base 7B model from this [link](https://huggingface.co/moxin-org/moxin-7b) and our chat 7B model from  this [link](https://huggingface.co/moxin-org/moxin-chat-7b). 
+You can download our base 7B model from this [link](https://huggingface.co/moxin-org/moxin-llm-7b) and our chat 7B model from  this [link](https://huggingface.co/moxin-org/moxin-chat-7b). 
  
 
 
