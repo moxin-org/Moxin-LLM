@@ -1,6 +1,6 @@
 <h1 align="center"> Moxin LLM</h1>
 
-<p align="center"> <a href="https://github.com/moxin-org/Moxin-LLM/blob/main/report/Moxin_7B.pdf">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-llm-7b">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-chat-7b">Chat Model</a>  </p>
+<p align="center"> <a href="https://arxiv.org/abs/2412.06845">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-llm-7b">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-chat-7b">Chat Model</a>  </p>
 
 
 ## Introduction
