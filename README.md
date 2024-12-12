@@ -156,7 +156,7 @@ cd ../layer_norm && pip install -v .
 ## Datasets
 
 
-We use the SlimPajama dataset for pretraining. You can download the dataset using Hugging Face datasets:
+To use the [SlimPajama dataset](https://huggingface.co/datasets/cerebras/SlimPajama-627B) for pretraining, you can download the dataset using Hugging Face datasets:
 ```
 import datasets 
 ds = datasets.load_dataset("cerebras/SlimPajama-627B")
@@ -164,7 +164,23 @@ ds = datasets.load_dataset("cerebras/SlimPajama-627B")
 SlimPajama is the largest extensively deduplicated, multi-corpora, open-source dataset for training large language models. SlimPajama was created by cleaning and deduplicating the 1.2T token RedPajama dataset from Together. By filtering out low quality data and duplicates, it  removes 49.6% of bytes, slimming down the RedPajama dataset from 1210B to 627B tokens.   SlimPajama offers the highest quality and most compute efficient data to train on for runs up to 627B tokens. When upsampled, SlimPajama is expected   to perform equal to or better than RedPajama-1T when training at trillion token scale. 
 
 
+To use the [stack-dedup dataset](https://huggingface.co/datasets/bigcode/the-stack-dedup) for pretraining, you can download the dataset using Hugging Face datasets:
+```
+from datasets import load_dataset
 
+# full dataset (3TB of data)
+ds = load_dataset("bigcode/the-stack-dedup", split="train")
+
+# specific language (e.g. Dockerfiles)
+ds = load_dataset("bigcode/the-stack-dedup", data_dir="data/dockerfile", split="train")
+
+# dataset streaming (will only download the data as needed)
+ds = load_dataset("bigcode/the-stack-dedup", streaming=True, split="train")
+for sample in iter(ds): print(sample["content"])
+```
+The Stack contains over 6TB of permissively-licensed source code files covering 358 programming languages. The dataset was created as part of the BigCode Project, an open scientific collaboration working on the responsible development of Large Language Models for Code (Code LLMs). The Stack serves as a pre-training dataset for Code LLMs, i.e., code-generating AI systems which enable the synthesis of programs from natural language descriptions as well as other from code snippets. This is the near-deduplicated version with 3TB data.
+
+You can find more details about the DCLM-baseline dataset on the [homepage](https://huggingface.co/datasets/mlfoundations/dclm-baseline-1.0). 
 
 ## Training
 
