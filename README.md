@@ -23,7 +23,7 @@ You can download our base 7B model from this [link](https://huggingface.co/moxin
 
 ## Evaluation 
 
-We test the performance of our model with [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). The evaluation results on common datasets are shown below. We test on AI2 Reasoning Challenge (25-shot), HellaSwag (10-shot), MMLU (5-shot), and Winogrande (5-shot).
+We test the performance of our model with [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). The evaluation results on common datasets are shown below. We test on AI2 Reasoning Challenge (25-shot), HellaSwag (10-shot), MMLU (5-shot), and Winogrande (5-shot).  We release the Moxin-7B-finetuned  as our base model. We further finetune our base model on Tulu v2 to obtain our chat model. 
 
 |          Models         | ARC-C | Hellaswag |  MMLU | WinoGrade |  Ave  |
 |:----------------------:|:-----:|:---------:|:-----:|:---------:|:-----:|
@@ -103,17 +103,15 @@ print(sequences[0]['generated_text'])
 
 
 
-
-
 ## Environment
 
-### 1. Dataset config
+#### 1. Dataset config
 To prepare the dataset, it needs to install the following package,
 ```
 pip install datasets
 ```
 
-### 2. Cuda install
+#### 2. Cuda install
 
 We use cuda 11.7. Other cuda versions may also work.
 ```
@@ -121,7 +119,7 @@ get https://developer.download.nvidia.com/compute/cuda/11.7.0/local_installers/c
 sudo sh cuda_11.7.0_515.43.04_linux.run    
 ```
 
-### 3. Install pytorch
+#### 3. Install pytorch
 
 We use pytorch 2.0.0. 
 ```
@@ -130,14 +128,14 @@ conda activate llm_train
 pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1
 ```
 
-### 4. Install other packages
+#### 4. Install other packages
 
 To install other packages, follow the requirements.txt
 ```
 pip install -r requirements.txt
 ```
 
-### 5. Install flash attention
+#### 5. Install flash attention
 
 We use flash-attention 2.2.1.
 ```
@@ -290,7 +288,14 @@ bash gemini.sh
 
 ## Citation
 
-
+```
+@article{zhao2024fully,
+  title={Fully Open Source Moxin-7B Technical Report},
+  author={Zhao, Pu and Shen, Xuan and Kong, Zhenglun and Shen, Yixin and Chang, Sung-En and Rupprecht, Timothy and Lu, Lei and Nan, Enfu and Yang, Changdi and He, Yumei and others},
+  journal={arXiv preprint arXiv:2412.06845},
+  year={2024}
+}
+```
 
 
 
