@@ -99,14 +99,22 @@ sequences = pipe(
 print(sequences[0]['generated_text'])
 ```
 
+## Convert to GGUF
 
 
+Build a typical deep learning environment with pytorch. Then use the script covert_hf_to_gguf.py to convert the hf model to GGUF.
+```
+python covert_hf_to_gguf.py  path_to_model_directory/
+```
+Then, you can experiment with this gguf model following [llama.cpp](https://github.com/ggerganov/llama.cpp). 
 
 
-## Environment
+## Training Environment
 
 #### 1. Dataset config
 To prepare the dataset, it needs to install the following package,
+
+
 ```
 pip install datasets
 ```
