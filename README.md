@@ -1,5 +1,5 @@
 <h1 align="center"> Moxin LLM</h1>
-
+<p align="center"> Moxin is a family of fully open-source and reproducible LLMs</p>
 <p align="center"> <a href="https://arxiv.org/abs/2412.06845">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-llm-7b">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-chat-7b">Chat Model</a>  </p>
 
 
