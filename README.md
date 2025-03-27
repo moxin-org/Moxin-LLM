@@ -202,7 +202,7 @@ colossalai run --nproc_per_node YOUR_GPU_PER_NODE --hostfile YOUR_HOST_FILE \
 benchmark.py --OTHER_CONFIGURATIONS
 ```
 
-#### a. Running on a sinlge node
+#### a. Running on a single node
 we provide an example to run the training on a single node as below,
 ```
 colossalai run --nproc_per_node 1 pretrain.py \
@@ -222,7 +222,7 @@ In the example, it uses the sample dataset 'togethercomputer/RedPajama-Data-1T-S
 bash run.sh
 ```
 
-#### b. Running on a sinlge node
+#### b. Running on a single node
 
 we provide an example to run the training on multiple nodes as below,
 ```
