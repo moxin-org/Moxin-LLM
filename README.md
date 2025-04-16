@@ -110,7 +110,20 @@ Then, you can experiment with this gguf model following [llama.cpp](https://gith
 
 
 
-## Post-Training
+##  Reinforcement Learning with GRPO
+
+To enhance the CoT capabilities of our model, we adopt RL techniques similar to DeepSeek R1. We first use high quality reasoning data to SFT our instruct model.  The reasoning data mainly includes Openthoughts   and OpenR1-Math-220k. Next, we  adopt  the RL techniques in DeepSeek R1, i.e., GRPO to  finetune our model with RL.  We adopt the [DeepScaleR](https://github.com/agentica-project/rllm)  as our RL training framework.
+
+We first use high quality reasoning data to SFT our instruct (DPO) model.
++ Dataset:  [OpenThoughts](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k) and  [OpenR1-Math-220k](https://huggingface.co/datasets/open-r1/OpenR1-Math-220k)
++ Framework: [open-instruct](https://github.com/allenai/open-instruct)
++ Configuration: [Llama-3.1-Tulu-3-8B-SFT](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
+
+Next, we  adopt GRPO to  finetune our model with RL.
++ Framework, configuration and Dataset: [DeepScaleR](https://github.com/agentica-project/rllm)
+
+
+## Post-Training with Tülu 3
 
 The open-source Tülu 3 dataset and framework are adopted for the model post-training. For our post-training, with our base model, we follow Tülu 3 to perform supervised finetuning (SFT) and then Direct Preference Optimization (DPO).
 
