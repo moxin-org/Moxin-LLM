@@ -109,7 +109,25 @@ python covert_hf_to_gguf.py  path_to_model_directory/
 Then, you can experiment with this gguf model following [llama.cpp](https://github.com/ggerganov/llama.cpp). 
 
 
-## Training Environment
+
+## Post-Training
+
+The open-source Tülu 3 dataset and framework are adopted for the model post-training. For our post-training, with our base model, we follow Tülu 3 to perform supervised finetuning (SFT) and then Direct Preference Optimization (DPO).
+
+Specifically, we use the Tülu 3 SFT Mixture dataset from Tülu 3  to train our base model with  the SFT training method for two epochs and obtain our SFT model, following the default training configuration of the Tülu 3 8B SFT model. 
++ Dataset:  [Tülu 3 SFT Mixture](https://huggingface.co/datasets/allenai/tulu-3-sft-mixture)
++ Framework: [open-instruct](https://github.com/allenai/open-instruct)
++ Configuration: [Llama-3.1-Tulu-3-8B-SFT](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
+
+
+Next, we continue to train our SFT  model  on the Tülu 3 8B Preference Mixture dataset from Tülu 3  with the DPO training method to obtain our DPO model, following the same training configuration of the Tülu 3 8B DPO model 
++ Dataset:  [Tülu 3 8B Preference Mixture](https://huggingface.co/datasets/allenai/llama-3.1-tulu-3-8b-preference-mixture)
++ Framework: [open-instruct](https://github.com/allenai/open-instruct)
++ Configuration: [Llama-3.1-Tulu-3-8B-DPO](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
+
+
+
+## Pre-Training Environment
 
 #### 1. Dataset config
 To prepare the dataset, it needs to install the following package,
@@ -159,7 +177,7 @@ cd ../layer_norm && pip install -v .
 ```
 
 
-## Datasets
+## Pre-Datasets
 
 
 To use the [SlimPajama dataset](https://huggingface.co/datasets/cerebras/SlimPajama-627B) for pretraining, you can download the dataset using Hugging Face datasets:
@@ -188,7 +206,7 @@ The Stack contains over 6TB of permissively-licensed source code files covering 
 
 You can find more details about the DCLM-baseline dataset on the [homepage](https://huggingface.co/datasets/mlfoundations/dclm-baseline-1.0). 
 
-## Training
+## Pre-Training
 
 We follow the [ColossalAI](https://github.com/hpcaitech/ColossalAI) framework to train the LLM model. Colossal-AI provides a collection of parallel components for the training. It aims to support   to write the distributed deep learning models just like how you write your model on your laptop. It provides user-friendly tools to kickstart distributed training and inference in a few lines. 
 
