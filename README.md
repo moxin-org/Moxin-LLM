@@ -168,9 +168,12 @@ We first use high quality reasoning data to SFT our instruct (DPO) model.
 + Framework: [open-instruct](https://github.com/allenai/open-instruct)
 + Configuration: [Llama-3.1-Tulu-3-8B-SFT](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
 
+Refer to 'scripts/finetune/instruct_finetune/sft_finetune.sh' for more details. 
+
 Next, we  adopt GRPO to  finetune our model with RL.
 + Framework, configuration and Dataset: [DeepScaleR](https://github.com/agentica-project/rllm)
 
+Refer to 'scripts/finetune/reason_finetune/train_7b.sh' for more details. 
 
 ## Post-Training with Tülu 3
 
@@ -181,12 +184,14 @@ Specifically, we use the Tülu 3 SFT Mixture dataset from Tülu 3  to train our 
 + Framework: [open-instruct](https://github.com/allenai/open-instruct)
 + Configuration: [Llama-3.1-Tulu-3-8B-SFT](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
 
+Refer to 'scripts/finetune/instruct_finetune/sft_finetune.sh' for more details. 
 
-Next, we continue to train our SFT  model  on the Tülu 3 8B Preference Mixture dataset from Tülu 3  with the DPO training method to obtain our DPO model, following the same training configuration of the Tülu 3 8B DPO model 
+Next, we continue to train our SFT  model  on the Tülu 3 8B Preference Mixture dataset from Tülu 3  with the DPO training method to obtain our DPO model, following the same training configuration of the Tülu 3 8B DPO model. 
 + Dataset:  [Tülu 3 8B Preference Mixture](https://huggingface.co/datasets/allenai/llama-3.1-tulu-3-8b-preference-mixture)
 + Framework: [open-instruct](https://github.com/allenai/open-instruct)
 + Configuration: [Llama-3.1-Tulu-3-8B-DPO](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
 
+Refer to 'scripts/finetune/instruct_finetune/dpo_finetune.sh' for more details. 
 
 
 ## Pre-Training Environment
@@ -239,7 +244,7 @@ cd ../layer_norm && pip install -v .
 ```
 
 
-## Pre-Datasets
+## Pretrain Datasets
 
 
 To use the [SlimPajama dataset](https://huggingface.co/datasets/cerebras/SlimPajama-627B) for pretraining, you can download the dataset using Hugging Face datasets:
