@@ -1,7 +1,7 @@
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 
-model_name = './model'
+model_name = 'moxin-org/Moxin-7B-LLM'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
         model_name,
@@ -19,13 +19,12 @@ pipe = pipeline(
 )
 
 
-
 prompt = "Can you explain the concept of regularization in machine learning?"
 
 sequences = pipe(
     prompt,
     do_sample=True,
-    max_new_tokens=100,
+    max_new_tokens=512,
     temperature=0.7,
     top_k=50,
     top_p=0.95,

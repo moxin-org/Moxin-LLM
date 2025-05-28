@@ -1,7 +1,12 @@
-<h1 align="center"> Moxin LLM</h1>
-<p align="center"> Moxin is a family of fully open-source and reproducible LLMs</p>
-<p align="center"> <a href="https://arxiv.org/abs/2412.06845">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-llm-7b">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-chat-7b">Chat Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-instruct-7b">Instruct Model</a>  &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-reasoning-7b">Reasoning Model</a> </p>
+# Moxin LLM
 
+Moxin is a family of fully open-source and reproducible LLMs
+
+[![arXiv](https://img.shields.io/badge/arXiv-2412.06845-df2a2a.svg?style=for-the-badge)](https://arxiv.org/abs/2412.06845v5)
+[![License](https://img.shields.io/badge/License-Apache_2.0-green.svg?style=for-the-badge)](https://github.com/moxin-org/Moxin-LLM/blob/main/LICENSE)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-moxin--org-yellow.svg?style=for-the-badge&logo=HuggingFace)](https://huggingface.co/moxin-org)
+
+---
 
 ## Introduction
 
@@ -9,20 +14,24 @@ Generative AI (GAI) offers unprecedented opportunities for research and innovati
 
 By promoting transparency and reproducibility, the MOF combats “openwashing” practices and establishes completeness and openness as primary criteria alongside the core tenets of responsible AI. Wide adoption of the MOF will foster a more open AI ecosystem, benefiting research, innovation, and adoption of state-of-the-art models. 
 
-We follow MOF to release the datasets during training, the training scripts, and the trained models. 
+In line with the MOF, we release our datasets used during training, the training scripts, and the trained models. 
 
 
+### Quick Start
+- [Usage Guide](inference) - Inference code with Pytorch.
+- [Quantization and Deployment](llamacpp) - Implementation and Inference using Llama.cpp quantized models.
 
-## Model
-You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm-7b),  [Moxin-7B-Chat](https://huggingface.co/moxin-org/moxin-chat-7b), [Moxin-7B-Instruct](https://huggingface.co/moxin-org/moxin-instruct-7b)  and [Moxin-7B-Reasoning](https://huggingface.co/moxin-org/moxin-reasoning-7b) models. 
+### Documentation 
+- [Pre-Training](train) - Complete training documentation
+- [Post-Training](finetune) - Post-Training with Tülu 3 and Reinforcement Learning with GRPO
+- [Evaluation](benchmark) - Benchmarking and evaluation
  
 
+## Model Family Overview
 
+You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm-7b), [Moxin-7B-Instruct](https://huggingface.co/moxin-org/moxin-instruct-7b), [Moxin-7B-Reasoning](https://huggingface.co/moxin-org/moxin-reasoning-7b) and [Moxin-7B-VLM](https://huggingface.co/moxin-org/Moxin-7B-VLM) models. 
 
-
-## Evaluation 
-
-### Base Model Evaluation
+### Base Model
 
 We test the performance of our base model with [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). The evaluation results on common datasets are shown below. We test on AI2 Reasoning Challenge (25-shot), HellaSwag (10-shot), MMLU (5-shot), and Winogrande (5-shot).  We release the Moxin-7B-Enhanced  as our base model. We further finetune our base model on Tulu v2 to obtain our chat model. 
 
@@ -60,7 +69,7 @@ We also test the zero shot performance on AI2 Reasoning Challenge (0-shot), AI2 
 
 
 
-### Instruct Model Evaluation
+### Instruct Model
 
 Our instruct model is trained with [Tulu 3](https://allenai.org/blog/tulu-3-technical). The evaluations are demonstrated below. We evaluate with  [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) and [OLMES](https://github.com/allenai/olmes). 
 
@@ -84,8 +93,6 @@ We also test the zero shot performance on AI2 Reasoning Challenge (0-shot), AI2 
 |Moxin-7B-DPO (Moxin-7B-Instruct) | 85.7 | 73.24 | 81.56 |81.1 |58.02| 75.92|
 
 
-
-
 The evaluation results with OLMES are shown below. 
 |Models/Datasets |GSM8K |MATH |Humaneval |Humaneval plus |MMLU |PopQA |BBH |TruthfulQA| Ave|
 |:-----------------:	|:---------:	|:---------:	|:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
@@ -94,7 +101,7 @@ The evaluation results with OLMES are shown below.
 |Moxin-7B-DPO (Moxin-7B-Instruct) |81.19| 36.42| 82.86| 77.18 |60.85 |23.85 |57.44| 55.27 |59.38|
 
 
-### Reasoning Model Evaluation
+### Reasoning Model
 
 Our reasoning model is trained with [DeepScaleR](https://github.com/agentica-project/rllm). The evaluation on math datasets are demonstrated below. 
 
@@ -106,277 +113,18 @@ Our reasoning model is trained with [DeepScaleR](https://github.com/agentica-pro
 |Moxin-7B-RL-DeepScaleR| 68 |57.5 |16.9| 30.4 |43.2|
 
 
-## Inference
-
-You can use the following code to run inference with the model. The model is saved under './model/' directory. Change the model directory accordingly or use the Huggingface link. 
-
-```
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-
-torch.backends.cuda.enable_mem_efficient_sdp(False)
-torch.backends.cuda.enable_flash_sdp(False)
-
-model_name = 'moxin-org/moxin-7b'
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(
-        model_name,
-        torch_dtype=torch.bfloat16,
-        device_map="auto",
-        trust_remote_code=True,
-    )
-
-pipe = pipeline(
-    "text-generation",
-    model=model,
-    tokenizer = tokenizer,
-    torch_dtype=torch.bfloat16,
-    device_map="auto"
-)
-
-prompt = "Can you explain the concept of regularization in machine learning?"
-
-sequences = pipe(
-    prompt,
-    do_sample=True,
-    max_new_tokens=100,
-    temperature=0.7,
-    top_k=50,
-    top_p=0.95,
-    num_return_sequences=1,
-)
-print(sequences[0]['generated_text'])
-```
-
-### Convert to GGUF
-
-
-Build a typical deep learning environment with pytorch. Then use the script covert_hf_to_gguf.py to convert the hf model to GGUF.
-```
-python covert_hf_to_gguf.py  path_to_model_directory/
-```
-Then, you can experiment with this gguf model following [llama.cpp](https://github.com/ggerganov/llama.cpp). 
-
-
-
-##  Reinforcement Learning with GRPO
-
-To enhance the CoT capabilities of our model, we adopt RL techniques similar to DeepSeek R1. We first use high quality reasoning data to SFT our instruct model.  The reasoning data mainly includes Openthoughts   and OpenR1-Math-220k. Next, we  adopt  the RL techniques in DeepSeek R1, i.e., GRPO to  finetune our model with RL.  We adopt the [DeepScaleR](https://github.com/agentica-project/rllm)  as our RL training framework.
-
-We first use high quality reasoning data to SFT our instruct (DPO) model.
-+ Dataset:  [OpenThoughts](https://huggingface.co/datasets/open-thoughts/OpenThoughts-114k) and  [OpenR1-Math-220k](https://huggingface.co/datasets/open-r1/OpenR1-Math-220k)
-+ Framework: [open-instruct](https://github.com/allenai/open-instruct)
-+ Configuration: [Llama-3.1-Tulu-3-8B-SFT](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
-
-Refer to 'scripts/finetune/instruct_finetune/sft_finetune.sh' for more details. 
-
-Next, we  adopt GRPO to  finetune our model with RL.
-+ Framework, configuration and Dataset: [DeepScaleR](https://github.com/agentica-project/rllm)
-
-Refer to 'scripts/finetune/reason_finetune/train_7b.sh' for more details. 
-
-## Post-Training with Tülu 3
-
-The open-source Tülu 3 dataset and framework are adopted for the model post-training. For our post-training, with our base model, we follow Tülu 3 to perform supervised finetuning (SFT) and then Direct Preference Optimization (DPO).
-
-Specifically, we use the Tülu 3 SFT Mixture dataset from Tülu 3  to train our base model with  the SFT training method for two epochs and obtain our SFT model, following the default training configuration of the Tülu 3 8B SFT model. 
-+ Dataset:  [Tülu 3 SFT Mixture](https://huggingface.co/datasets/allenai/tulu-3-sft-mixture)
-+ Framework: [open-instruct](https://github.com/allenai/open-instruct)
-+ Configuration: [Llama-3.1-Tulu-3-8B-SFT](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
-
-Refer to 'scripts/finetune/instruct_finetune/sft_finetune.sh' for more details. 
-
-Next, we continue to train our SFT  model  on the Tülu 3 8B Preference Mixture dataset from Tülu 3  with the DPO training method to obtain our DPO model, following the same training configuration of the Tülu 3 8B DPO model. 
-+ Dataset:  [Tülu 3 8B Preference Mixture](https://huggingface.co/datasets/allenai/llama-3.1-tulu-3-8b-preference-mixture)
-+ Framework: [open-instruct](https://github.com/allenai/open-instruct)
-+ Configuration: [Llama-3.1-Tulu-3-8B-DPO](https://github.com/allenai/open-instruct/blob/main/docs/tulu3.md)
-
-Refer to 'scripts/finetune/instruct_finetune/dpo_finetune.sh' for more details. 
-
-
-## Pre-Training Environment
-
-#### 1. Dataset config
-To prepare the dataset, it needs to install the following package,
-
-
-```
-pip install datasets
-```
-
-#### 2. Cuda install
-
-We use cuda 11.7. Other cuda versions may also work.
-```
-get https://developer.download.nvidia.com/compute/cuda/11.7.0/local_installers/cuda_11.7.0_515.43.04_linux.run
-sudo sh cuda_11.7.0_515.43.04_linux.run    
-```
-
-#### 3. Install pytorch
-
-We use pytorch 2.0.0. 
-```
-conda create --name llm_train python==3.10
-conda activate llm_train
-pip install torch==2.0.0 torchvision==0.15.1 torchaudio==2.0.1
-```
-
-#### 4. Install other packages
-
-To install other packages, follow the requirements.txt
-```
-pip install -r requirements.txt
-```
-
-#### 5. Install flash attention
-
-We use flash-attention 2.2.1.
-```
-git clone https://github.com/Dao-AILab/flash-attention.git
-cd flash-attention/
-git checkout a1576ad                ##  flash-attention 2.2.1
-python setup.py  install
-cd ./csrc
-cd fused_dense_lib  && pip install -v .
-cd ../xentropy && pip install -v .
-cd ../rotary && pip install -v .
-cd ../layer_norm && pip install -v .
-```
-
-
-## Pretrain Datasets
-
-
-To use the [SlimPajama dataset](https://huggingface.co/datasets/cerebras/SlimPajama-627B) for pretraining, you can download the dataset using Hugging Face datasets:
-```
-import datasets 
-ds = datasets.load_dataset("cerebras/SlimPajama-627B")
-```
-SlimPajama is the largest extensively deduplicated, multi-corpora, open-source dataset for training large language models. SlimPajama was created by cleaning and deduplicating the 1.2T token RedPajama dataset from Together. By filtering out low quality data and duplicates, it  removes 49.6% of bytes, slimming down the RedPajama dataset from 1210B to 627B tokens.   SlimPajama offers the highest quality and most compute efficient data to train on for runs up to 627B tokens. When upsampled, SlimPajama is expected   to perform equal to or better than RedPajama-1T when training at trillion token scale. 
-
-
-To use the [stack-dedup dataset](https://huggingface.co/datasets/bigcode/the-stack-dedup) for pretraining, you can download the dataset using Hugging Face datasets:
-```
-from datasets import load_dataset
-
-# full dataset (3TB of data)
-ds = load_dataset("bigcode/the-stack-dedup", split="train")
-
-# specific language (e.g. Dockerfiles)
-ds = load_dataset("bigcode/the-stack-dedup", data_dir="data/dockerfile", split="train")
-
-# dataset streaming (will only download the data as needed)
-ds = load_dataset("bigcode/the-stack-dedup", streaming=True, split="train")
-for sample in iter(ds): print(sample["content"])
-```
-The Stack contains over 6TB of permissively-licensed source code files covering 358 programming languages. The dataset was created as part of the BigCode Project, an open scientific collaboration working on the responsible development of Large Language Models for Code (Code LLMs). The Stack serves as a pre-training dataset for Code LLMs, i.e., code-generating AI systems which enable the synthesis of programs from natural language descriptions as well as other from code snippets. This is the near-deduplicated version with 3TB data.
-
-You can find more details about the DCLM-baseline dataset on the [homepage](https://huggingface.co/datasets/mlfoundations/dclm-baseline-1.0). 
-
-## Pre-Training
-
-We follow the [ColossalAI](https://github.com/hpcaitech/ColossalAI) framework to train the LLM model. Colossal-AI provides a collection of parallel components for the training. It aims to support   to write the distributed deep learning models just like how you write your model on your laptop. It provides user-friendly tools to kickstart distributed training and inference in a few lines. 
-
-We provide a few examples to show how to run benchmark or pretraining based on Colossal-AI. 
-
-### 1. Training LLM
-
-You can find the shell scripts in 'scripts/train_7B' directory. The main command should be in the format of:
-```
-colossalai run --nproc_per_node YOUR_GPU_PER_NODE --hostfile YOUR_HOST_FILE \
-benchmark.py --OTHER_CONFIGURATIONS
-```
-
-#### a. Running on a sinlge node
-we provide an example to run the training on a single node as below,
-```
-colossalai run --nproc_per_node 1 pretrain.py \
-        --config 7b \
-        --dataset togethercomputer/RedPajama-Data-1T-Sample \
-        --batch_size 1 \
-        --num_epochs 5 \
-        --save_interval 5000 \
-        --max_length 2048 \
-        --save_dir output-checkpoints \
-        --plugin zero2_cpu \
-        --lr 2e-5 \
-        --expanded_model hpcai-tech/Colossal-LLaMA-2-7b-base
-```
-In the example, it uses the sample dataset 'togethercomputer/RedPajama-Data-1T-Sample' for training. It trains the 7B model 'hpcai-tech/Colossal-LLaMA-2-7b-base'. You can refer the main file 'run.sh' and 'pretrain.py' for more details. To start the training, run the following, 
-```bash
-bash run.sh
-```
-
-#### b. Running on a sinlge node
-
-we provide an example to run the training on multiple nodes as below,
-```
-srun colossalai run --num_nodes 8 --nproc_per_node 8 pretrain.py \
-        --config 7b \
-        --dataset cerebras/SlimPajama-627B \
-        --batch_size 1 \
-        --num_epochs 10 \
-        --save_interval 50000 \
-        --max_length 2048 \
-        --save_dir output-checkpoints \
-        --flash_attention \
-        --plugin zero2_cpu \
-        --lr 1e-5 \
-        --expanded_model hpcai-tech/Colossal-LLaMA-2-7b-base
-```
-It uses 8 nodes. Put your host file (`hosts.txt`) in this directory with your real host ip or host name.
-Here is a sample `hosts.txt`:
-```text
-hostname1
-hostname2
-hostname3
-...
-hostname8
-```
-You can refer to   the main file 'run-multi-server.sh' and 'pretrain.py' for more details. To start the training, run the following, 
-
-```bash
-bash run-multi-server.sh
-```
-
-### 2. Benchmark
-
-
-You can find the shell scripts in 'scripts/benchmark_7B' directory. The benchmark mainly test the throughput of the LLM, without actual model training.  The main command should be in the format of:
-```
-colossalai run --nproc_per_node YOUR_GPU_PER_NODE --hostfile YOUR_HOST_FILE \
-benchmark.py --OTHER_CONFIGURATIONS
-```
-
-Here we will show an example of how to run training llama pretraining with 'gemini, batch_size=16, sequence_length=4096, gradient_checkpoint=True, flash_attn=True'.
-
-#### a. Running environment
-
-This experiment was performed on 4 computing nodes with 32 L40S GPUs in total for LLaMA-2 7B. The nodes are connected with RDMA and GPUs within one node are fully connected with NVLink. 
-
-#### b. Running command
-
-```bash
-cd scripts/benchmark_7B
-```
-
-First, put your host file (`hosts.txt`) in this directory with your real host ip or host name.
-
-Here is a sample `hosts.txt`:
-```text
-hostname1
-hostname2
-hostname3
-hostname4
-```
-
-Then add environment variables to script if needed.
-
-Finally, run the following command to start training:
-
-```bash
-bash gemini.sh
-```
+### VLM Model
+
+Our VLM model is trained with [prismatic-vlms](https://github.com/TRI-ML/prismatic-vlms). The evaluation is demonstrated below. 
+
+|                          	|  GQA  	| VizWiz 	| RefCOCO+ 	| OCID-Ref 	|  VSR  	|  POPE 	| TallyQA 	|  Ave. 	|
+|--------------------------	|:-----:	|:------:	|:--------:	|:--------:	|:-----:	|:-----:	|:-------:	|:-----:	|
+| LLaVa v1.5 7B (Base)     	| 61.58 	|  54.25 	|   49.47  	|   35.07  	| 51.47 	| 86.57 	|  62.06  	| 57.21 	|
+| Llama-2 Chat 7B          	| 62.11 	|  56.39 	|   58.5   	|   46.3   	|  61.8 	|  86.8 	|   58.1  	| 61.43 	|
+| Mistral v0.1 7B          	|  63.3 	|  55.32 	|   65.1   	|   48.8   	|  58.5 	|  87.1 	|   61.7  	| 62.83 	|
+| Mistral Instruct v0.1 7B 	| 62.71 	|  54.35 	|   64.9   	|    48    	|  57.8 	|  87.5 	|   64.5  	| 62.82 	|
+| Llama-2 7B               	| 62.44 	|  55.98 	|   59.47  	|   43.89  	| 63.67 	| 86.74 	|  59.22  	| 61.63 	|
+| Ours                     	| 64.88 	|  54.08 	|   71.3   	|   48.4   	|  60.8 	|  87.3 	|    66   	| 64.68 	|
 
 
 ## Citation
