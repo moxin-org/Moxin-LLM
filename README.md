@@ -169,9 +169,7 @@ outputs = pipeline(
     messages,
     max_new_tokens=1024,
 )
-
 print(outputs[0]["generated_text"][-1])
-
 ```
 
 ### Chat Template
