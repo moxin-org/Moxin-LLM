@@ -1,6 +1,6 @@
 <h1 align="center"> Moxin LLM</h1>
 <p align="center"> Moxin is a family of fully open-source and reproducible LLMs</p>
-<p align="center"> <a href="https://arxiv.org/abs/2412.06845">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-llm-7b">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-chat-7b">Chat Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-instruct-7b">Instruct Model</a>  &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-reasoning-7b">Reasoning Model</a> </p>
+<p align="center"> <a href="https://arxiv.org/abs/2412.06845">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-LLM">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Chat">Chat Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Instruct">Instruct Model</a>  &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Reasoning">Reasoning Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-VLM">VLM Model</a>  </p>
 
 
 ## Introduction
@@ -108,8 +108,7 @@ Our reasoning model is trained with [DeepScaleR](https://github.com/agentica-pro
 
 ## Inference
 
-You can use the following code to run inference with the model. The model is saved under './model/' directory. Change the model directory accordingly or use the Huggingface link. 
-
+You can use the following code to run inference with the model. 
 ```
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
@@ -117,7 +116,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 torch.backends.cuda.enable_mem_efficient_sdp(False)
 torch.backends.cuda.enable_flash_sdp(False)
 
-model_name = 'moxin-org/moxin-7b'
+model_name = 'moxin-org/Moxin-7B-LLM'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
         model_name,
@@ -147,6 +146,50 @@ sequences = pipe(
 )
 print(sequences[0]['generated_text'])
 ```
+
+For the Instruct model and Reasoning model, you can use the following code for inference.
+```
+import transformers
+import torch
+
+model_id = "moxin-org/Moxin-7B-Instruct" # or  "moxin-org/Moxin-7B-Reasoning" 
+pipeline = transformers.pipeline(
+    "text-generation",
+    model=model_id,
+    model_kwargs={"torch_dtype": torch.bfloat16},
+    device_map="auto",
+)
+
+messages = [
+    {"role": "system", "content": "You are a helpful AI assistant!"},
+    {"role": "user", "content": "How are you doing?"},
+]
+
+outputs = pipeline(
+    messages,
+    max_new_tokens=1024,
+)
+
+print(outputs[0]["generated_text"][-1])
+
+```
+
+### Chat Template
+
+The chat template is formatted as:
+```
+<|system|>\nYou are a helpful AI assistant!\n<|user|>\nHow are you doing?\n<|assistant|>\nThank you for asking! As an AI, I don't have feelings, but I'm functioning normally and ready to assist you. How can I help you today?<|endoftext|>
+```
+Or with new lines expanded:
+```
+<|system|>
+You are a helpful AI assistant!
+<|user|>
+How are you doing?
+<|assistant|>
+Thank you for asking! As an AI, I don't have feelings, but I'm functioning normally and ready to assist you. How can I help you today?<|endoftext|>
+```
+
 
 ### Convert to GGUF
 
