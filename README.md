@@ -186,7 +186,7 @@ outputs = pipeline(
 print(outputs[0]["generated_text"][-1])
 ```
 
-For the inference of our VLM, pleaser refer to [prismatic-vlm-moxin](https://github.com/Bobchenyx/prismatic-vlm-moxin) for environment construction and inference code.
+For the inference of our VLM, pleaser refer to [Moxin-VLM](https://github.com/moxin-org/Moxin-VLM) for environment construction and inference code.
 
 ### Chat Template
 
