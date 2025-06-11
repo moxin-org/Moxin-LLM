@@ -106,6 +106,20 @@ Our reasoning model is trained with [DeepScaleR](https://github.com/agentica-pro
 |Moxin-7B-RL-DeepScaleR| 68 |57.5 |16.9| 30.4 |43.2|
 
 
+### VLM Model Evaluation
+
+Our VLM model is trained with [prismatic-vlms](https://github.com/TRI-ML/prismatic-vlms). The evaluation is demonstrated below. 
+
+|                          	|  GQA  	| VizWiz 	| RefCOCO+ 	| OCID-Ref 	|  VSR  	|  POPE 	| TallyQA 	|  Ave. 	|
+|--------------------------	|:-----:	|:------:	|:--------:	|:--------:	|:-----:	|:-----:	|:-------:	|:-----:	|
+| LLaVa v1.5 7B (Base)     	| 61.58 	|  54.25 	|   49.47  	|   35.07  	| 51.47 	| 86.57 	|  62.06  	| 57.21 	|
+| Llama-2 Chat 7B          	| 62.11 	|  56.39 	|   58.5   	|   46.3   	|  61.8 	|  86.8 	|   58.1  	| 61.43 	|
+| Mistral v0.1 7B          	|  63.3 	|  55.32 	|   65.1   	|   48.8   	|  58.5 	|  87.1 	|   61.7  	| 62.83 	|
+| Mistral Instruct v0.1 7B 	| 62.71 	|  54.35 	|   64.9   	|    48    	|  57.8 	|  87.5 	|   64.5  	| 62.82 	|
+| Llama-2 7B               	| 62.44 	|  55.98 	|   59.47  	|   43.89  	| 63.67 	| 86.74 	|  59.22  	| 61.63 	|
+| Ours                     	| 64.88 	|  54.08 	|   71.3   	|   48.4   	|  60.8 	|  87.3 	|    66   	| 64.68 	|
+
+
 ## Inference
 
 You can use the following code to run inference with the model. 
@@ -171,6 +185,8 @@ outputs = pipeline(
 )
 print(outputs[0]["generated_text"][-1])
 ```
+
+For the inference of our VLM, pleaser refer to [prismatic-vlm-moxin](https://github.com/Bobchenyx/prismatic-vlm-moxin) for environment construction and inference code.
 
 ### Chat Template
 
