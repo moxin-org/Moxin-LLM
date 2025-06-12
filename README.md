@@ -1,6 +1,6 @@
 <h1 align="center"> Moxin LLM</h1>
 <p align="center"> Moxin is a family of fully open-source and reproducible LLMs</p>
-<p align="center"> <a href="https://arxiv.org/abs/2412.06845">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-llm-7b">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-chat-7b">Chat Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-instruct-7b">Instruct Model</a>  &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/moxin-reasoning-7b">Reasoning Model</a> </p>
+<p align="center"> <a href="https://arxiv.org/abs/2412.06845">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-LLM">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Chat">Chat Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Instruct">Instruct Model</a>  &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Reasoning">Reasoning Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-VLM">VLM Model</a>  </p>
 
 
 ## Introduction
@@ -106,10 +106,23 @@ Our reasoning model is trained with [DeepScaleR](https://github.com/agentica-pro
 |Moxin-7B-RL-DeepScaleR| 68 |57.5 |16.9| 30.4 |43.2|
 
 
+### VLM Model Evaluation
+
+Our VLM model is trained with [prismatic-vlms](https://github.com/TRI-ML/prismatic-vlms). The evaluation is demonstrated below. 
+
+|                          	|  GQA  	| VizWiz 	| RefCOCO+ 	| OCID-Ref 	|  VSR  	|  POPE 	| TallyQA 	|  Ave. 	|
+|--------------------------	|:-----:	|:------:	|:--------:	|:--------:	|:-----:	|:-----:	|:-------:	|:-----:	|
+| LLaVa v1.5 7B (Base)     	| 61.58 	|  54.25 	|   49.47  	|   35.07  	| 51.47 	| 86.57 	|  62.06  	| 57.21 	|
+| Llama-2 Chat 7B          	| 62.11 	|  56.39 	|   58.5   	|   46.3   	|  61.8 	|  86.8 	|   58.1  	| 61.43 	|
+| Mistral v0.1 7B          	|  63.3 	|  55.32 	|   65.1   	|   48.8   	|  58.5 	|  87.1 	|   61.7  	| 62.83 	|
+| Mistral Instruct v0.1 7B 	| 62.71 	|  54.35 	|   64.9   	|    48    	|  57.8 	|  87.5 	|   64.5  	| 62.82 	|
+| Llama-2 7B               	| 62.44 	|  55.98 	|   59.47  	|   43.89  	| 63.67 	| 86.74 	|  59.22  	| 61.63 	|
+| Ours                     	| 64.88 	|  54.08 	|   71.3   	|   48.4   	|  60.8 	|  87.3 	|    66   	| 64.68 	|
+
+
 ## Inference
 
-You can use the following code to run inference with the model. The model is saved under './model/' directory. Change the model directory accordingly or use the Huggingface link. 
-
+You can use the following code to run inference with the model. 
 ```
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
@@ -117,7 +130,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 torch.backends.cuda.enable_mem_efficient_sdp(False)
 torch.backends.cuda.enable_flash_sdp(False)
 
-model_name = 'moxin-org/moxin-7b'
+model_name = 'moxin-org/Moxin-7B-LLM'
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
         model_name,
@@ -147,6 +160,50 @@ sequences = pipe(
 )
 print(sequences[0]['generated_text'])
 ```
+
+For the Instruct model and Reasoning model, you can use the following code for inference.
+```
+import transformers
+import torch
+
+model_id = "moxin-org/Moxin-7B-Instruct" # or  "moxin-org/Moxin-7B-Reasoning" 
+pipeline = transformers.pipeline(
+    "text-generation",
+    model=model_id,
+    model_kwargs={"torch_dtype": torch.bfloat16},
+    device_map="auto",
+)
+
+messages = [
+    {"role": "system", "content": "You are a helpful AI assistant!"},
+    {"role": "user", "content": "How are you doing?"},
+]
+
+outputs = pipeline(
+    messages,
+    max_new_tokens=1024,
+)
+print(outputs[0]["generated_text"][-1])
+```
+
+For the inference of our VLM, pleaser refer to [Moxin-VLM](https://github.com/moxin-org/Moxin-VLM) for environment construction and inference code.
+
+### Chat Template
+
+The chat template is formatted as:
+```
+<|system|>\nYou are a helpful AI assistant!\n<|user|>\nHow are you doing?\n<|assistant|>\nThank you for asking! As an AI, I don't have feelings, but I'm functioning normally and ready to assist you. How can I help you today?<|endoftext|>
+```
+Or with new lines expanded:
+```
+<|system|>
+You are a helpful AI assistant!
+<|user|>
+How are you doing?
+<|assistant|>
+Thank you for asking! As an AI, I don't have feelings, but I'm functioning normally and ready to assist you. How can I help you today?<|endoftext|>
+```
+
 
 ### Convert to GGUF
 
