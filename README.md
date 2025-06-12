@@ -1,7 +1,13 @@
-<h1 align="center"> Moxin LLM</h1>
-<p align="center"> Moxin is a family of fully open-source and reproducible LLMs</p>
-<p align="center"> <a href="https://arxiv.org/abs/2412.06845">Technical Report</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-LLM">Base Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Chat">Chat Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Instruct">Instruct Model</a>  &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-Reasoning">Reasoning Model</a> &nbsp&nbsp | &nbsp&nbsp <a href="https://huggingface.co/moxin-org/Moxin-7B-VLM">VLM Model</a>  </p>
+# Moxin LLM
+Moxin is a family of fully open-source and reproducible LLMs
 
+[![arXiv](https://img.shields.io/badge/arXiv-2412.06845-df2a2a.svg?style=for-the-badge)](https://arxiv.org/abs/2412.06845v5)
+[![License](https://img.shields.io/badge/License-Apache_2.0-green.svg?style=for-the-badge)](https://github.com/moxin-org/Moxin-LLM/blob/main/LICENSE)
+[![HuggingFace](https://img.shields.io/badge/HuggingFace-moxin--org-yellow.svg?style=for-the-badge&logo=HuggingFace)](https://huggingface.co/moxin-org)
+[![PyTorch](https://img.shields.io/badge/Built_with-PyTorch-ee4c2c?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
+[![Llama.cpp](https://img.shields.io/badge/Supports-Llama.cpp-007acc?style=for-the-badge)](https://github.com/ggerganov/llama.cpp)
+
+---
 
 ## Introduction
 
@@ -9,16 +15,12 @@ Generative AI (GAI) offers unprecedented opportunities for research and innovati
 
 By promoting transparency and reproducibility, the MOF combats “openwashing” practices and establishes completeness and openness as primary criteria alongside the core tenets of responsible AI. Wide adoption of the MOF will foster a more open AI ecosystem, benefiting research, innovation, and adoption of state-of-the-art models. 
 
-We follow MOF to release the datasets during training, the training scripts, and the trained models. 
-
+In line with the MOF, we release our datasets used during training, the training scripts, and the trained models. 
 
 
 ## Model
 You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm-7b),  [Moxin-7B-Chat](https://huggingface.co/moxin-org/moxin-chat-7b), [Moxin-7B-Instruct](https://huggingface.co/moxin-org/moxin-instruct-7b)  and [Moxin-7B-Reasoning](https://huggingface.co/moxin-org/moxin-reasoning-7b) models. 
  
-
-
-
 
 ## Evaluation 
 
