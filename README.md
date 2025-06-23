@@ -22,7 +22,7 @@ You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm
 
 ## Evaluation 
 
-### Base Model Evaluation
+### Base Model
 
 We test the performance of our base model with [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness). The evaluation results on common datasets are shown below. We test on AI2 Reasoning Challenge (25-shot), HellaSwag (10-shot), MMLU (5-shot), and Winogrande (5-shot).  We release the Moxin-7B-Enhanced  as our base model. We further finetune our base model on Tulu v2 to obtain our chat model. 
 
@@ -60,7 +60,7 @@ We also test the zero shot performance on AI2 Reasoning Challenge (0-shot), AI2 
 
 
 
-### Instruct Model Evaluation
+### Instruct Model
 
 Our instruct model is trained with [Tulu 3](https://allenai.org/blog/tulu-3-technical). The evaluations are demonstrated below. We evaluate with  [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) and [OLMES](https://github.com/allenai/olmes). 
 
@@ -84,8 +84,6 @@ We also test the zero shot performance on AI2 Reasoning Challenge (0-shot), AI2 
 |Moxin-7B-DPO (Moxin-7B-Instruct) | 85.7 | 73.24 | 81.56 |81.1 |58.02| 75.92|
 
 
-
-
 The evaluation results with OLMES are shown below. 
 |Models/Datasets |GSM8K |MATH |Humaneval |Humaneval plus |MMLU |PopQA |BBH |TruthfulQA| Ave|
 |:-----------------:	|:---------:	|:---------:	|:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|:-----:	|
@@ -94,7 +92,7 @@ The evaluation results with OLMES are shown below.
 |Moxin-7B-DPO (Moxin-7B-Instruct) |81.19| 36.42| 82.86| 77.18 |60.85 |23.85 |57.44| 55.27 |59.38|
 
 
-### Reasoning Model Evaluation
+### Reasoning Model
 
 Our reasoning model is trained with [DeepScaleR](https://github.com/agentica-project/rllm). The evaluation on math datasets are demonstrated below. 
 
@@ -106,7 +104,7 @@ Our reasoning model is trained with [DeepScaleR](https://github.com/agentica-pro
 |Moxin-7B-RL-DeepScaleR| 68 |57.5 |16.9| 30.4 |43.2|
 
 
-### VLM Model Evaluation
+### VLM Model
 
 Our VLM model is trained with [prismatic-vlms](https://github.com/TRI-ML/prismatic-vlms). The evaluation is demonstrated below. 
 
