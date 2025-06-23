@@ -1,5 +1,4 @@
-# Moxin LLM
-Moxin is a family of fully open-source and reproducible LLMs
+# Moxin LLM : A Family of Fully Open-Source and Reproducible LLMs
 
 [![arXiv](https://img.shields.io/badge/arXiv-2412.06845-df2a2a.svg?style=for-the-badge)](https://arxiv.org/abs/2412.06845v5)
 [![License](https://img.shields.io/badge/License-Apache_2.0-green.svg?style=for-the-badge)](https://github.com/moxin-org/Moxin-LLM/blob/main/LICENSE)
@@ -16,11 +15,21 @@ By promoting transparency and reproducibility, the MOF combats “openwashing”
 In line with the MOF, we release our datasets used during training, the training scripts, and the trained models. 
 
 
+### Quick Start
+- [Usage Guide](inference) - Inference code with Pytorch.
+- [Quantization and Deployment](llamacpp) - Implementation and Inference using Llama.cpp quantized models.
+
+### Documentation
+- [Pre-Training Guide](train) - Complete training documentation
+- [Post-Training Guide](finetune) - Post-Training with Tülu 3 and Reinforcement Learning with GRPO
+- [Evaluation](benchmark) - Benchmarking and evaluation
+
+
 ## Model
 You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm-7b), [Moxin-7B-Instruct](https://huggingface.co/moxin-org/moxin-instruct-7b), [Moxin-7B-Reasoning](https://huggingface.co/moxin-org/moxin-reasoning-7b) and [Moxin-7B-VLM](https://huggingface.co/moxin-org/Moxin-7B-VLM) models. 
  
 
-## Evaluation 
+## Model Family Overview
 
 ### Base Model
 
