@@ -23,13 +23,11 @@ In line with the MOF, we release our datasets used during training, the training
 - [Pre-Training Guide](train) - Complete training documentation
 - [Post-Training Guide](finetune) - Post-Training with Tülu 3 and Reinforcement Learning with GRPO
 - [Evaluation](benchmark) - Benchmarking and evaluation
-
-
-## Model
-You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm-7b), [Moxin-7B-Instruct](https://huggingface.co/moxin-org/moxin-instruct-7b), [Moxin-7B-Reasoning](https://huggingface.co/moxin-org/moxin-reasoning-7b) and [Moxin-7B-VLM](https://huggingface.co/moxin-org/Moxin-7B-VLM) models. 
  
 
 ## Model Family Overview
+
+You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm-7b), [Moxin-7B-Instruct](https://huggingface.co/moxin-org/moxin-instruct-7b), [Moxin-7B-Reasoning](https://huggingface.co/moxin-org/moxin-reasoning-7b) and [Moxin-7B-VLM](https://huggingface.co/moxin-org/Moxin-7B-VLM) models. 
 
 ### Base Model
 
