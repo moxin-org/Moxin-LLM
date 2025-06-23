@@ -1,6 +1,6 @@
 ## Benchmark
 
-### 1. Installation
+### Installation
 
 Please install the latest ColossalAI from source.
 
@@ -14,7 +14,7 @@ Then install other dependencies.
 pip install -r requirements.txt
 ```
 
-### 4. Shell Script Examples
+### Shell Script Examples
 
 For your convenience, we provide some shell scripts to run benchmark with various configurations.
 
@@ -27,8 +27,8 @@ Here we will show an example of how to run training
 llama pretraining with `gemini, batch_size=16, sequence_length=4096, gradient_checkpoint=True, flash_attn=True`.
 
 #### a. Running environment
-This experiment was performed on 4 computing nodes with 32 A800/H800 80GB GPUs in total for LLaMA-1 65B or LLaMA-2 70B. The nodes are
-connected with RDMA and GPUs within one node are fully connected with NVLink.
+
+This experiment was performed on 4 computing nodes with 32 L40S GPUs in total for LLaMA-2 7B. The nodes are connected with RDMA and GPUs within one node are fully connected with NVLink. 
 
 #### b. Running command
 
