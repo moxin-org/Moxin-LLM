@@ -19,9 +19,9 @@ In line with the MOF, we release our datasets used during training, the training
 - [Usage Guide](inference) - Inference code with Pytorch.
 - [Quantization and Deployment](llamacpp) - Implementation and Inference using Llama.cpp quantized models.
 
-### Documentation
-- [Pre-Training Guide](train) - Complete training documentation
-- [Post-Training Guide](finetune) - Post-Training with Tülu 3 and Reinforcement Learning with GRPO
+### Documentation 
+- [Pre-Training](train) - Complete training documentation
+- [Post-Training](finetune) - Post-Training with Tülu 3 and Reinforcement Learning with GRPO
 - [Evaluation](benchmark) - Benchmarking and evaluation
  
 
