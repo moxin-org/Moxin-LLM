@@ -17,7 +17,7 @@ In line with the MOF, we release our datasets used during training, the training
 
 
 ## Model
-You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm-7b),  [Moxin-7B-Chat](https://huggingface.co/moxin-org/moxin-chat-7b), [Moxin-7B-Instruct](https://huggingface.co/moxin-org/moxin-instruct-7b)  and [Moxin-7B-Reasoning](https://huggingface.co/moxin-org/moxin-reasoning-7b) models. 
+You can download our  [Moxin-7B-Base](https://huggingface.co/moxin-org/moxin-llm-7b), [Moxin-7B-Instruct](https://huggingface.co/moxin-org/moxin-instruct-7b), [Moxin-7B-Reasoning](https://huggingface.co/moxin-org/moxin-reasoning-7b) and [Moxin-7B-VLM](https://huggingface.co/moxin-org/Moxin-7B-VLM) models. 
  
 
 ## Evaluation 
