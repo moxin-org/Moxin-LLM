@@ -1,4 +1,6 @@
-# Moxin LLM : A Family of Fully Open-Source and Reproducible LLMs
+# Moxin LLM
+
+Moxin is a family of fully open-source and reproducible LLMs
 
 [![arXiv](https://img.shields.io/badge/arXiv-2412.06845-df2a2a.svg?style=for-the-badge)](https://arxiv.org/abs/2412.06845v5)
 [![License](https://img.shields.io/badge/License-Apache_2.0-green.svg?style=for-the-badge)](https://github.com/moxin-org/Moxin-LLM/blob/main/LICENSE)
