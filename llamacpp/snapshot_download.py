@@ -7,7 +7,7 @@ print("Starting download...")
 
 snapshot_download(
     repo_id = "second-state/moxin-instruct-7b-GGUF",
-    local_dir = "moxin-org/Moxin-7B-Instruct",
+    local_dir = "Moxin-7B-Instruct",
     allow_patterns=["*Q6*"], # adjust if not enough VRAM
 )
 
