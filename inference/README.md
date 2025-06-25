@@ -2,8 +2,14 @@
 
 You can use the following code to run inference with the model. 
 
+```bash
+conda create -n moxin-llm python=3.10 -y
+conda activate moxin-llm
 
-For the inference of our VLM, pleaser refer to [Moxin-VLM](https://github.com/moxin-org/Moxin-VLM) for environment construction and inference code.
+pip install -r requirements.txt
+
+python inference-Instruct.py
+```
 
 ### Chat Template
 
