@@ -6,13 +6,9 @@ from huggingface_hub import snapshot_download
 print("Starting download...")
 
 snapshot_download(
-    repo_id = "moxin-org/Moxin-7B-VLM",
-    local_dir = "Moxin-7B-VLM",
-)
-
-snapshot_download(
-    repo_id = "bobchenyx/Moxin-7B-VLM-hf",
-    local_dir = "Moxin-7B-VLM-hf",
+    repo_id = "second-state/moxin-instruct-7b-GGUF",
+    local_dir = "moxin-org/Moxin-7B-Instruct",
+    allow_patterns=["*Q6*"], # adjust if not enough VRAM
 )
 
 print("Download finished.")
